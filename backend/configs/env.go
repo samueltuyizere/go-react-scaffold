@@ -9,8 +9,7 @@ func AppEnv() string {
 }
 
 func EnvIsProd() bool {
-	isProd := os.Getenv("ENV") == "production"
-	return isProd
+	return AppEnv() == "production"
 }
 
 
