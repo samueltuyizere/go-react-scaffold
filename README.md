@@ -1,4 +1,4 @@
-# Go + React Project Scaffold
+# Go + React Project Scaffold [WIP]
 
 This a template repository that includes:
 
