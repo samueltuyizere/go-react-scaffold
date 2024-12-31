@@ -43,7 +43,6 @@ func ConnectDB() {
 	}
 }
 
-
 func StoreRequestInDb(request any, collection string) (string, error) {
 	coll := MI.DB.Collection(collection)
 	insertResult, err := coll.InsertOne(context.TODO(), request)
@@ -56,4 +55,16 @@ func StoreRequestInDb(request any, collection string) (string, error) {
 		return "", err
 	}
 	return uuid.Hex(), nil
+}
+
+func UpdateRequestInDb(ID string, request any, collection string) (string, error) {
+	coll := MI.DB.Collection(collection)
+	filter := bson.M{"_id": ID}
+	update := bson.M{"$set": request}
+	_, err := coll.UpdateOne(context.TODO(), filter, update)
+	if err != nil {
+		log.Printf("there was an error updating the request \n%v\n", err)
+		return "", err
+	}
+	return ID, nil
 }
