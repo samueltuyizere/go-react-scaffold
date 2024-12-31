@@ -12,7 +12,6 @@ func EnvIsProd() bool {
 	return AppEnv() == "production"
 }
 
-
 func GetRedisUrl() string {
 	return os.Getenv("REDIS_URL")
 }
@@ -27,4 +26,24 @@ func EnvMongoURI() string {
 
 func EnvPort() string {
 	return os.Getenv("PORT")
+}
+
+func GetPaypackSecret() string {
+	return os.Getenv("PAYPACK_CLIENT_SECRET")
+}
+
+func GetPaypackId() string {
+	return os.Getenv("PAYPACK_CLIENT_ID")
+}
+
+func GetPlunkKey() string {
+	return os.Getenv("USE_PLUNK")
+}
+
+func TelegramBotId() string {
+	return os.Getenv("TELEGRAM_BOT_ID")
+}
+
+func TelegramChatID() string {
+	return os.Getenv("TELEGRAM_CHAT_ID")
 }

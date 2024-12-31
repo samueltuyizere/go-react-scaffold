@@ -10,7 +10,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func processUserLogin(email, password string) (string, bool, error){
+func processUserLogin(email, password string) (string, bool, error) {
 	user, err := users.GetUserByEmail(email)
 	if err != nil {
 		return "", false, err
@@ -29,16 +29,16 @@ func processUserLogin(email, password string) (string, bool, error){
 
 func createNewUser(email string, password []byte) (users.User, error) {
 	uid := uuid.New().String()
-	hashedPassword , err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	if err != nil {
 		return users.User{}, err
 	}
 	user := users.User{
-		Email:          email,
-		Status:         "pending",
-		Password:       hashedPassword,
-		ID:             uid,
-		CreatedAt:      time.Now(),
+		Email:     email,
+		Status:    "pending",
+		Password:  hashedPassword,
+		ID:        uid,
+		CreatedAt: time.Now(),
 	}
 	err = user.CreateNewUser()
 	if err != nil {

@@ -5,9 +5,9 @@ import (
 )
 
 type loginResult struct {
-	token string
+	token  string
 	status bool
-	error error
+	error  error
 }
 
 func HandleUserLogin(ctx echo.Context) error {
@@ -19,9 +19,9 @@ func HandleUserLogin(ctx echo.Context) error {
 		return ctx.JSON(401, err)
 	}
 	rslt := loginResult{
-		token: token,
+		token:  token,
 		status: status,
-		error: nil,
+		error:  nil,
 	}
 	return ctx.JSON(200, rslt)
 }
