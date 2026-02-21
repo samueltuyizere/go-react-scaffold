@@ -86,38 +86,45 @@ make clean
 ### TypeScript / React (Frontend)
 
 **Imports:**
+
 - Use ES modules (`import` syntax)
 - Group imports: React/core libraries first, then local imports
 - Use path aliases if configured (none currently)
 
 **Formatting:**
+
 - No Prettier config - use consistent 2-space indentation
 - Single quotes for strings
 - Semicolons required
 
 **Types:**
+
 - Strict TypeScript enabled (`strict: true` in tsconfig)
 - Enable all strict options: `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`
 - Use explicit return types for functions when not obvious
 
 **Naming:**
+
 - Components: PascalCase (e.g., `UserProfile.tsx`)
 - Functions/variables: camelCase
 - Constants: UPPER_SNAKE_CASE for true constants
 - Files: PascalCase for components, camelCase for utilities
 
 **React Patterns:**
+
 - Use functional components with hooks
 - Destructure props in function parameters
 - Prefer `const` over `let`
 - Use `useState`, `useEffect` from React (no class components)
 
 **TailwindCSS:**
+
 - Utility-first approach - use Tailwind classes directly
 - Custom classes in `App.css` for component-specific styles
 - Use `@apply` sparingly
 
 **Error Handling:**
+
 - Always check for null/undefined before accessing properties
 - Use optional chaining (`?.`) when appropriate
 - Handle fetch errors with try/catch
@@ -125,16 +132,19 @@ make clean
 ### Go (Backend)
 
 **Imports:**
+
 - Group imports: standard library first, then external packages, then local packages
 - Use blank imports only when necessary (e.g., `godotenv/autoload`)
 - Import path: `backend/<package>` for local packages
 
 **Formatting:**
+
 - Standard Go formatting (`gofmt` / `goimports`)
 - Use `goimports` to organize imports
 - Run `gofmt -w .` before committing
 
 **Naming:**
+
 - Packages: lowercase, single word (e.g., `auth`, `configs`)
 - Exported: PascalCase (e.g., `ConnectDB`, `User`)
 - Unexported: camelCase (e.g., `processUserLogin`)
@@ -142,28 +152,33 @@ make clean
 - Files: descriptive, lowercase with underscores if needed
 
 **Types:**
+
 - Use structs with tags for JSON/BSON/validation
 - Tag format: `` `json:"field" bson:"field"` ``
 - Prefer explicit types over `any`/`interface{}`
 
 **Error Handling:**
+
 - Always check errors: `if err != nil { return err }`
 - Wrap errors with context: `fmt.Errorf("context: %w", err)`
 - Use `log.Fatalf()` only in main/init, not in libraries
 - Return errors to caller, don't log and swallow
 
 **Structure:**
+
 - One package per directory
 - Separate concerns: handlers in `routes.go`, logic in `controller.go`, models in `model.go`
 - Main package in `main.go` at root
 
 **Database (MongoDB):**
+
 - Use context with timeouts: `context.TODO()` for now, `context.WithTimeout()` preferred
 - Handle connection errors at startup
 - Use `bson.M{}` for queries
 - Close connections properly (deferred disconnect)
 
 **HTTP (Echo):**
+
 - Use middleware for CORS, logging, recovery
 - Handler signature: `func(c echo.Context) error`
 - Return JSON responses: `c.JSON(status, data)`
@@ -174,12 +189,14 @@ make clean
 When adding tests:
 
 **Go:**
+
 - Test files: `*_test.go`
 - Run: `go test ./... -v` or `go test ./package -run TestName -v`
 - Use testify for assertions (not yet included)
 - Mock external dependencies
 
 **TypeScript/React:**
+
 - Use Vitest (aligned with Vite) or Jest
 - Test files: `*.test.ts` or `*.test.tsx`
 - Run single test: `npm test -- TestName`
@@ -219,3 +236,7 @@ Copy from `backend/.env.example` and fill in values.
 - Use HTTPS in production
 - Set secure session cookies
 - Sanitize MongoDB queries to prevent injection
+
+# Rules for AI-assisted coding
+
+1. Always use Context7 MCP when I need library/API documentation, code generation, setup or configuration steps without me having to explicitly ask.
