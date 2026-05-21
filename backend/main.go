@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"log/slog"
+	"os"
 	_ "time/tzdata"
 
 	"backend/auth"
@@ -14,18 +15,25 @@ import (
 )
 
 func main() {
-	var app = echo.New()
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
+
+	app := echo.New()
 	app.Use(middleware.Logger())
 	app.Use(middleware.Recover())
 	app.Use(middleware.CORS())
 
 	configs.ConnectDB()
+	slog.Info("database connected", "env", configs.AppEnv())
 
-	// public routes
 	app.POST("/register", auth.HandleUserRegistration)
 	app.POST("/login", auth.HandleUserLogin)
 
 	port := fmt.Sprintf(":%s", configs.EnvPort())
-	log.Fatal(app.Start(port))
+	slog.Info("server starting", "port", port)
 
+	if err := app.Start(port); err != nil {
+		slog.Error("server failed", "error", err)
+		os.Exit(1)
+	}
 }
